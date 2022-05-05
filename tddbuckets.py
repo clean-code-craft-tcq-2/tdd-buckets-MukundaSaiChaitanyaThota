@@ -24,10 +24,9 @@ class driven_range:
     def getRangeCloserPosition(self, listBeginPosition):
         rangeCloserPosition = listBeginPosition
         for i in range(listBeginPosition+1, len(self.inputData)):
+            differenceInValues = (self.inputData[i]-self.inputData[rangeCloserPosition])
             if((self.inputData[i]-self.inputData[rangeCloserPosition]) == 1):
                 rangeCloserPosition = i
-            else:
-                break
         return rangeCloserPosition
 
     def generateResult(self):
