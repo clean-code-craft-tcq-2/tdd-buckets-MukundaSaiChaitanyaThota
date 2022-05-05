@@ -1,6 +1,6 @@
 class driven_range:
     
-    def generateRangeData(self):
+    def getRangeListInfo(self):
         cumulativeFrequency = 0
         rangeInfoList = []
         listCurrentPosition = 0
@@ -23,7 +23,7 @@ class driven_range:
         return rangeCloserPosition
 
     def generateResult(self):
-        rangeInfoList = self.generateRangeData()
+        rangeInfoList = self.getRangeListInfo()
         rangeResult = {}
         for rangeInfo in rangeInfoList:
             rangeData = f'{rangeInfo[0]}-{rangeInfo[1]}'
@@ -34,21 +34,6 @@ class driven_range:
 
     def printOnConsole(self, rangeResult):
         print(rangeResult)  
-        
-    def generateRangeData(self):
-        cumulativeFrequency = 0
-        rangeInfoList = []
-        listCurrentPosition = 0
-        while (cumulativeFrequency != len(self.inputData)):
-            rangeOpenerElement = self.inputData[listCurrentPosition]
-            rangeCloserPosition = self.getRangeCloserPosition(listCurrentPosition)
-            frequency = rangeCloserPosition - listCurrentPosition + 1
-            rangeCloserElement = self.inputData[rangeCloserPosition]
-            rangeInfoList.append((rangeOpenerElement, rangeCloserElement, frequency))
-            listCurrentPosition = rangeCloserPosition + 1
-            cumulativeFrequency+=frequency
-        return rangeInfoList
-    
     
     def main(self, inputData):
         inputData.sort()
