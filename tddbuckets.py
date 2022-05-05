@@ -39,3 +39,19 @@ class driven_range:
         inputData.sort()
         self.inputData = inputData.copy()
         return self.generateResult()
+    
+    def convertADCReadingToAmpereSensor(self, digitalValueRange, ADC_Sensor_Type):
+        analogValueRange=[]
+        maxDigitalValue, scale, offset = self.sensorParameters(ADC_Sensor_Type)
+        for digitalValue in digitalValueRange:
+            if (0<=digitalValue and digitalValue<=maxDigitalValue):
+                analogValue = abs(round((scale*digitalValue/maxDigitalValue)-offset))
+                analogValueRange.append(analogValue)
+        return analogValueRange
+    
+    def sensorParameters(self, ADC_Sensor_Type):
+    ADC_Sensor_Type_dict={ 
+                            '12Bits':{'maxDigitalValue' : 4094, 'scale' : 10 , 'offset' : 0}, 
+                          '10Bits':{'maxDigitalValue' : 1023, 'scale' : 30, 'offset' : 15}
+                         }
+    return ADC_Sensor_Type_dict[ADC_Sensor_Type]['maxDigitalValue'],ADC_Sensor_Type_dict[ADC_Sensor_Type]['scale'],ADC_Sensor_Type_dict[ADC_Sensor_Type]['offset']
